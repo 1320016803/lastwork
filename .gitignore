@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+.venv/
+venv/
+.env
+*.egg-info/
+.DS_Store
+可爱计时器图片生成.png
