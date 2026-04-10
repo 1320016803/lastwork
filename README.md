@@ -4,11 +4,11 @@
 
 ## ⏰ hh计时器 ⏰
 
-**cute-timer** · Python · PySide6
+**muddled-warehouse** · Python · PySide6
 
 超可爱的桌面小计时器，支持25分钟专注计时，可快速调整时长，界面圆润可爱，适合学习工作时使用。
 
-**克隆地址**：`https://gitee.com/mengmengdongdong/cute-timer`
+**克隆地址**：`https://gitee.com/zhou-chiheng-qwq/muddled-warehouse`
 
 </div>
 
@@ -23,7 +23,7 @@
 
 本仓库设计为在 Gitee 上 **公开**：公开仓库下 `git clone` **不需要** Gitee 账号或密码。若克隆时仍被要求登录，多半是仓库被设成了私有，请维护者在 Gitee 改为公开（见文末「维护者」一句）。
 
-**路径说明**：下文中的 **`cute-timer`** 表示「克隆到本机后的项目文件夹名」，通常与 **仓库名** 一致。若你的仓库名不同，请把所有路径里的 `cute-timer` 换成你的实际文件夹名。
+**路径说明**：下文中的 **`muddled-warehouse`** 表示「克隆到本机后的项目文件夹名」，通常与 **仓库名** 一致。若你的仓库名不同，请把所有路径里的 `muddled-warehouse` 换成你的实际文件夹名。
 
 ---
 
@@ -36,8 +36,8 @@
 3. 进入你想存放项目的目录（例如用户主目录），执行：
 
 ```bash
-git clone https://gitee.com/mengmengdongdong/cute-timer.git
-cd cute-timer
+git clone https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git
+cd muddled-warehouse
 ```
 
 4. 再继续下面「安装依赖」步骤。
@@ -66,13 +66,13 @@ cd cute-timer
 **安装时请发送：**
 
 ```text
-请打开（或克隆）公开仓库 https://gitee.com/mengmengdongdong/cute-timer ，阅读 README 里的「给智能体的安装剧本」，根据我当前操作系统逐步执行。克隆公开仓库时不要向用户索要 Gitee 账号或密码。若某一步失败，按 README 里的说明降级处理（尤其是桌面快捷方式）。最后请明确告诉我：项目目录路径、用哪条命令启动（若用了 venv，要写全 venv 里的 python/pythonw 路径）。
+请打开（或克隆）公开仓库 https://gitee.com/zhou-chiheng-qwq/muddled-warehouse ，阅读 README 里的「给智能体的安装剧本」，根据我当前操作系统逐步执行。克隆公开仓库时不要向用户索要 Gitee 账号或密码。若某一步失败，按 README 里的说明降级处理（尤其是桌面快捷方式）。最后请明确告诉我：项目目录路径、用哪条命令启动（若用了 venv，要写全 venv 里的 python/pythonw 路径）。
 ```
 
 **卸载时请发送：**
 
 ```text
-请阅读仓库 https://gitee.com/mengmengdongdong/cute-timer 的 README 中「给智能体的卸载剧本」，在我当前操作系统下按步骤执行，并在完成后告诉我删除了哪些路径。若本地文件夹名与仓库名不一致，请按实际文件夹名删除。
+请阅读仓库 https://gitee.com/zhou-chiheng-qwq/muddled-warehouse 的 README 中「给智能体的卸载剧本」，在我当前操作系统下按步骤执行，并在完成后告诉我删除了哪些路径。若本地文件夹名与仓库名不一致，请按实际文件夹名删除。
 ```
 
 若智能体已经打开你本机的克隆目录，可把「打开（或克隆）公开仓库 …」改成：「请阅读本仓库 README 中的「给智能体的安装剧本」……」。
@@ -82,8 +82,8 @@ cd cute-timer
 ## 给智能体的安装剧本
 
 > **受众**：OpenClaw、WorkBuddy、Cursor Agent 等自动化助手。请根据**当前操作系统**选择对应分支，在用户同意的前提下执行命令。  
-> **固定目录名（默认）**：项目克隆到用户主目录下的 **`cute-timer`**（与卸载剧本一致）。  
-> **克隆与凭据（重要）**：本仓库以 **Gitee 公开仓库** 方式提供。**只读克隆 `git clone https://gitee.com/mengmengdongdong/cute-timer.git` 在仓库为公开时不需要、也不应要求用户提供 Gitee 用户名或密码。**  
+> **固定目录名（默认）**：项目克隆到用户主目录下的 **`muddled-warehouse`**（与卸载剧本一致）。  
+> **克隆与凭据（重要）**：本仓库以 **Gitee 公开仓库** 方式提供。**只读克隆 `git clone https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git` 在仓库为公开时不需要、也不应要求用户提供 Gitee 用户名或密码。**  
 > - **禁止**向用户索取 Gitee 登录密码或私人令牌来完成克隆。  
 > - 若 `git clone` 失败并提示需要认证，说明远程可能仍为**私有**或 URL 错误：请明确告知用户「需由维护者将仓库改为公开」，**不要**让用户把密码发给你。  
 > - 为避免交互式卡住，克隆命令建议使用非交互环境变量（见下方示例中的 `GIT_TERMINAL_PROMPT=0`；Windows PowerShell 用 `$env:GIT_TERMINAL_PROMPT = '0'`）。  
@@ -108,19 +108,19 @@ cd cute-timer
 
 ### 3. 克隆仓库（公开仓库、无需 Gitee 密码）
 
-**HTTPS 克隆地址**：`https://gitee.com/mengmengdongdong/cute-timer.git`
+**HTTPS 克隆地址**：`https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git`
 
-**Windows（PowerShell 示例）** — 将 `$Repo` 设为实际文件夹名（默认 `cute-timer`）：
+**Windows（PowerShell 示例）** — 将 `$Repo` 设为实际文件夹名（默认 `muddled-warehouse`）：
 
 ```powershell
 $env:GIT_TERMINAL_PROMPT = '0'
-$Repo = "cute-timer"
+$Repo = "muddled-warehouse"
 $dest = Join-Path $env:USERPROFILE $Repo
 if (Test-Path $dest) {
   Set-Location $dest
-  if (Test-Path .git) { git pull } else { Set-Location ..; Remove-Item -Recurse -Force $dest; git -c credential.helper= clone "https://gitee.com/mengmengdongdong/cute-timer.git" $dest; Set-Location $dest }
+  if (Test-Path .git) { git pull } else { Set-Location ..; Remove-Item -Recurse -Force $dest; git -c credential.helper= clone "https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git" $dest; Set-Location $dest }
 } else {
-  git -c credential.helper= clone "https://gitee.com/mengmengdongdong/cute-timer.git" $dest
+  git -c credential.helper= clone "https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git" $dest
   Set-Location $dest
 }
 python -m pip install -r requirements.txt
@@ -130,13 +130,13 @@ python -m pip install -r requirements.txt
 
 ```bash
 export GIT_TERMINAL_PROMPT=0
-REPO="cute-timer"
+REPO="muddled-warehouse"
 DEST="$HOME/$REPO"
 if [ -d "$DEST" ]; then
   cd "$DEST" || exit 1
-  if [ -d .git ]; then git pull; else cd .. && rm -rf "$DEST" && git -c credential.helper= clone "https://gitee.com/mengmengdongdong/cute-timer.git" "$DEST" && cd "$DEST" || exit 1; fi
+  if [ -d .git ]; then git pull; else cd .. && rm -rf "$DEST" && git -c credential.helper= clone "https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git" "$DEST" && cd "$DEST" || exit 1; fi
 else
-  git -c credential.helper= clone "https://gitee.com/mengmengdongdong/cute-timer.git" "$DEST"
+  git -c credential.helper= clone "https://gitee.com/zhou-chiheng-qwq/muddled-warehouse.git" "$DEST"
   cd "$DEST"
 fi
 python3 -m pip install -r requirements.txt
@@ -153,8 +153,8 @@ python3 -m pip install -r requirements.txt
 - 若用户明确要求**长期**默认走国内源，可再执行 `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`（需用户知情同意）。
 
 **若 `pip install` 报错 externally-managed-environment（常见于 Homebrew Python）**：在项目目录执行 `python3 -m venv .venv`（Windows 可用 `py -3 -m venv .venv`），再使用 `.venv/bin/python -m pip install -r requirements.txt`（Windows 为 `.venv\Scripts\python.exe -m pip ...`）。**此后启动程序必须用同一 venv 里的解释器**，例如：  
-- Windows：`"%USERPROFILE%\cute-timer\.venv\Scripts\pythonw.exe"` + 工作目录为项目根，参数填 `main.py` 的绝对路径；或在项目目录执行 `.venv\Scripts\pythonw.exe main.py`。  
-- macOS / Linux：`"$HOME/cute-timer/.venv/bin/python" main.py`。  
+- Windows：`"%USERPROFILE%\muddled-warehouse\.venv\Scripts\pythonw.exe"` + 工作目录为项目根，参数填 `main.py` 的绝对路径；或在项目目录执行 `.venv\Scripts\pythonw.exe main.py`。  
+- macOS / Linux：`"$HOME/muddled-warehouse/.venv/bin/python" main.py`。  
 桌面快捷方式若已创建，应将 **`TargetPath` 改为上述 venv 内的 `pythonw.exe` / `python`**，不要仍指向系统全局 `pythonw`。
 
 ### 4. （可选）桌面快捷方式 — 成功则做，失败则跳过
@@ -162,10 +162,10 @@ python3 -m pip install -r requirements.txt
 **Windows**：在能使用 PowerShell 且能访问用户桌面的环境中，可尝试用 `WScript.Shell` 创建 `.lnk`：
 
 1. 解析 `pythonw.exe` 路径：可执行 `where.exe pythonw` 或 `Get-Command pythonw`；若无，试 `pyw` 与 `where.exe pyw`。
-2. `TargetPath` = 上一步得到的 `pythonw.exe`（或 `pyw.exe`）；**若依赖装在项目内 `.venv` 里**，则改为 `"%USERPROFILE%\cute-timer\.venv\Scripts\pythonw.exe"`。  
-3. `Arguments` = `"<USERPROFILE>\cute-timer\main.py"`（请展开为绝对路径并保留引号）。  
-4. `WorkingDirectory` = `<USERPROFILE>\cute-timer`。  
-5. `IconLocation` = `<USERPROFILE>\cute-timer\assets\app.ico`（仓库内已带多尺寸 Windows 图标）。  
+2. `TargetPath` = 上一步得到的 `pythonw.exe`（或 `pyw.exe`）；**若依赖装在项目内 `.venv` 里**，则改为 `"%USERPROFILE%\muddled-warehouse\.venv\Scripts\pythonw.exe"`。  
+3. `Arguments` = `"<USERPROFILE>\muddled-warehouse\main.py"`（请展开为绝对路径并保留引号）。  
+4. `WorkingDirectory` = `<USERPROFILE>\muddled-warehouse`。  
+5. `IconLocation` = `<USERPROFILE>\muddled-warehouse\assets\app.ico`（仓库内已带多尺寸 Windows 图标）。  
 6. 快捷方式文件名建议：`hh计时器.lnk`，放在 `[Environment]::GetFolderPath('Desktop')` 对应目录。
 
 PowerShell 模板（需自行替换 `$PythonW`）：
@@ -173,7 +173,7 @@ PowerShell 模板（需自行替换 `$PythonW`）：
 ```powershell
 $WshShell = New-Object -ComObject WScript.Shell
 $Desktop = [Environment]::GetFolderPath('Desktop')
-$Repo = "cute-timer"
+$Repo = "muddled-warehouse"
 $Shortcut = $WshShell.CreateShortcut("$Desktop\hh计时器.lnk")
 $Shortcut.TargetPath = $PythonW
 $Shortcut.Arguments = "`"$env:USERPROFILE\$Repo\main.py`""
@@ -182,9 +182,9 @@ $Shortcut.IconLocation = "$env:USERPROFILE\$Repo\assets\app.ico"
 $Shortcut.Save()
 ```
 
-**macOS**：可向 `~/Desktop` 写入一个可执行的小脚本，调用 `python3 "$HOME/cute-timer/main.py"`，并 `chmod +x`；或提示用户在访达中手动拖放创建别名。
+**macOS**：可向 `~/Desktop` 写入一个可执行的小脚本，调用 `python3 "$HOME/muddled-warehouse/main.py"`，并 `chmod +x`；或提示用户在访达中手动拖放创建别名。
 
-**Linux**：可在 `~/Desktop` 创建 `.desktop` 文件，`Exec` 指向 `python3 /home/<用户>/cute-timer/main.py`，并赋予可执行权限（具体路径按实际用户主目录填写）。
+**Linux**：可在 `~/Desktop` 创建 `.desktop` 文件，`Exec` 指向 `python3 /home/<用户>/muddled-warehouse/main.py`，并赋予可执行权限（具体路径按实际用户主目录填写）。
 
 若任一步报错或与沙箱/权限冲突，**跳过本节**，并明确告知用户：已进入项目目录后运行 `pythonw main.py`（Windows）或 `python3 main.py` 即可。
 
@@ -200,13 +200,13 @@ $Shortcut.Save()
 
 ### 固定约定
 
-- 项目目录：**`%USERPROFILE%\cute-timer`**（Windows）或 **`$HOME/cute-timer`**（macOS / Linux）。  
+- 项目目录：**`%USERPROFILE%\muddled-warehouse`**（Windows）或 **`$HOME/muddled-warehouse`**（macOS / Linux）。  
 - Windows 桌面快捷方式文件名：**`hh计时器.lnk`**（若安装时用了其它名称，应与当时保持一致）。
 
 ### Windows（PowerShell 示例）
 
 ```powershell
-$Repo = "cute-timer"
+$Repo = "muddled-warehouse"
 $proj = Join-Path $env:USERPROFILE $Repo
 if (Test-Path $proj) { Remove-Item -Recurse -Force $proj }
 
@@ -218,7 +218,7 @@ if (Test-Path $lnk) { Remove-Item -Force $lnk }
 ### macOS / Linux（bash 示例）
 
 ```bash
-REPO="cute-timer"
+REPO="muddled-warehouse"
 rm -rf "$HOME/$REPO"
 ```
 
