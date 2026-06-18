@@ -1,0 +1,18 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+def ode(t, y):
+    y1, y2 = y
+    dy1 = y2
+    dy2 = -3 * y2 - 2 * y1
+    return [dy1, dy2]
+t_range = (0, 10)
+t = np.linspace(0, 10, 200)
+init = [2, 0] 
+sol = solve_ivp(ode, t_range, init, t_eval=t)
+plt.plot(sol.t, sol.y[0])
+plt.xlabel('t')
+plt.ylabel('y')
+plt.title(r"微分方程 $y''+3y'+2y=0$ 特解曲线")
+plt.grid(True)
+plt.show()

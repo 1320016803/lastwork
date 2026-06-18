@@ -1,3 +1,4 @@
+# Python 相关
 __pycache__/
 *.py[cod]
 *.pyo
@@ -6,5 +7,31 @@ __pycache__/
 venv/
 .env
 *.egg-info/
+
+# 系统文件
 .DS_Store
+Thumbs.db
+
+# 编辑器/IDE
+.idea/
+.vscode/*
+!.vscode/launch.json
+
+# 应用产生的配置与历史（包含 API Key，勿提交！）
+doc_converter_app/core/config.json
+doc_converter_app/core/history.json
+
+# 测试临时输入/输出
+doc_converter_app/_sample_inputs/
+doc_converter_app/_sample_outputs/
+doc_converter_app/_test_*.py
+
+# PyInstaller / 打包产物
+build/
+dist/
+*.spec
+*.exe
+
+# 之前用户的本地图片等
 可爱计时器图片生成.png
+cute-timer.png.png

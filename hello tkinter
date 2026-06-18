@@ -1,0 +1,66 @@
+from errno import E2BIG
+import tkinter as tk
+root = tk.Tk()
+tk.Label(root,text="Hello,tkinter!").pack()
+root.mainloop()
+
+import tkinter as tk
+def calc(op):
+    a = int(e1.get())
+    b = int(e2.get())
+    if op == "+":
+        res.set(a+b)
+    else:
+        res.set(a-b)    
+root = tk.Tk()
+e1 = tk.Entry(root,width=5)
+e2 = tk.Entry(root,width=5)
+e1.pack()
+e2.pack()
+tk.Button(root,text="+",command=lambda:calc("+")).pack()
+tk.Button(root,text="-",command=lambda:calc("-")).pack()
+res = tk.StringVar()
+tk.Label(root,textvariable=res).pack()
+root.mainloop()
+
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+x = np.linspace(-3, 3, 100)
+y = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X ** 2 + Y ** 2)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Z, cmap='plasma')
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title(r'$z=\sin(x^2+y^2)$')
+plt.show()
+
+
+
+
+import numpy as np
+mat = np.array([[2, 1, 0],              
+                [1, 2, 1],
+                [0, 1, 2]])
+print("原矩阵：\n", mat)
+mat_T = mat.T
+print("\n矩阵转置：\n", mat_T)
+det_mat = np.linalg.det(mat)
+print("\n矩阵行列式：", det_mat)
+try:
+    mat_inv = np.linalg.inv(mat)
+    print("\n逆矩阵：\n", mat_inv)
+except np.linalg.LinAlgError:
+    print("\n矩阵不可逆")
+unit_mat = np.eye(3)
+print("\n3阶单位阵：\n", unit_mat)
+diag_mat = np.diag([1, 4, 7])
+print("\n3阶对角阵：\n", diag_mat)
+

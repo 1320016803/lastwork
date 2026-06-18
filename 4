@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+import numpy as np
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+categories = [f'类别{i+1}' for i in range(8)]
+values = np.random.randint(10, 100, size=8)
+theta = np.linspace(0, 2 * np.pi, len(categories), endpoint=False)
+width = 2 * np.pi / len(categories)
+colors = plt.cm.viridis(values / max(values))
+plt.figure(figsize=(8, 8))
+ax = plt.subplot(111, projection='polar')
+bars = ax.bar(theta, values, width=width, color=colors, alpha=0.7)
+ax.set_xticks(theta)
+ax.set_xticklabels(categories)
+plt.title('渐变色南丁格尔图示例', pad=20)
+plt.tight_layout()
+plt.show()

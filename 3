@@ -1,0 +1,14 @@
+import matplotlib.pyplot as plt
+import numpy as np
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+categories = [f'类别{i+1}' for i in range(8)]
+values = np.random.randint(10, 100, size=8)
+plt.figure(figsize=(8, 8))
+wedges, texts, autotexts = plt.pie(
+    values, labels=categories, autopct='%1.1f%%',
+    wedgeprops=dict(width=0.4), colors=plt.cm.Paired.colors
+)
+plt.title('环形饼图示例')
+plt.tight_layout()
+plt.show()

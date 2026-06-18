@@ -1,0 +1,14 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+categories = [f'类别{i+1}' for i in range(8)]
+values = np.random.randint(10, 100, size=8)
+plt.figure(figsize=(10, 6))
+plt.barh(categories, values, color='skyblue')
+plt.title('水平条形图示例')
+plt.xlabel('数值')
+plt.ylabel('类别')
+plt.tight_layout()
+plt.show()

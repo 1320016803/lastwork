@@ -1,0 +1,157 @@
+import os
+import pandas as pd
+from openpyxl import load_workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
+from docx import Document
+from docx.shared import Pt, RGBColor, Inches
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
+
+EXCEL_INPUT = '学生信息表.xlsx'
+EXCEL_OUTPUT = '学生成绩汇总.xlsx'
+WORD_OUTPUT = '学生成绩汇总报告.docx'
+
+# 如果源文件不存在，创建示例数据，便于脚本独立运行
+if not os.path.exists(EXCEL_INPUT):
+    sample = pd.DataFrame({
+        '姓名': ['张三', '李四', '王五', '赵六', '孙七'],
+        '语文': [88, 76, 92, 65, 80],
+        '数学': [95, 82, 78, 88, 90],
+        '英语': [78, 90, 85, 72, 86]
+    })
+    sample.to_excel(EXCEL_INPUT, index=False)
+    print(f'已创建示例 {EXCEL_INPUT}')
+
+# ============================================================
+# 1. 读取学生信息表并计算总分
+# ============================================================
+df = pd.read_excel(EXCEL_INPUT)
+df['总分'] = df.iloc[:, 1:].sum(axis=1)
+
+# ============================================================
+# 2. 写入 Excel，并使用 openpyxl 设置总分列格式
+# ============================================================
+with pd.ExcelWriter(EXCEL_OUTPUT, engine='openpyxl') as writer:
+    df.to_excel(writer, index=False, sheet_name='成绩汇总')
+
+wb = load_workbook(EXCEL_OUTPUT)
+ws = wb['成绩汇总']
+
+total_col_idx = list(df.columns).index('总分') + 1  # Excel 列号从 1 开始
+total_col_letter = get_column_letter(total_col_idx)
+
+# 定义样式
+header_font = Font(bold=True, color='FFFFFF', size=11)
+header_fill = PatternFill('solid', fgColor='4F81BD')
+total_font = Font(bold=True, color='C00000', size=11)
+total_fill = PatternFill('solid', fgColor='FFF2CC')
+center_align = Alignment(horizontal='center', vertical='center')
+thin = Side(border_style='thin', color='BFBFBF')
+border = Border(left=thin, right=thin, top=thin, bottom=thin)
+
+# 设置表头样式
+for col_idx in range(1, ws.max_column + 1):
+    cell = ws.cell(row=1, column=col_idx)
+    cell.font = header_font
+    cell.fill = header_fill
+    cell.alignment = center_align
+    cell.border = border
+
+# 设置总分列样式：加粗、红色字体、浅黄色背景、居中
+for row_idx in range(2, ws.max_row + 1):
+    cell = ws.cell(row=row_idx, column=total_col_idx)
+    cell.font = total_font
+    cell.fill = total_fill
+    cell.alignment = center_align
+    cell.border = border
+
+# 为其他数据单元格添加边框与居中
+for row_idx in range(2, ws.max_row + 1):
+    for col_idx in range(1, ws.max_column + 1):
+        cell = ws.cell(row=row_idx, column=col_idx)
+        cell.alignment = center_align
+        cell.border = border
+
+# 自动调整列宽
+for col_idx in range(1, ws.max_column + 1):
+    letter = get_column_letter(col_idx)
+    max_len = max(
+        [len(str(ws.cell(row=r, column=col_idx).value)) for r in range(1, ws.max_row + 1)]
+    )
+    ws.column_dimensions[letter].width = max_len + 4
+
+wb.save(EXCEL_OUTPUT)
+print(f'Excel 汇总表已生成：{EXCEL_OUTPUT}，"总分" 列已设置格式。')
+
+# ============================================================
+# 3. 生成 Word 报告并插入成绩表格
+# ============================================================
+doc = Document()
+
+# 设置默认字体（兼容中文）
+style = doc.styles['Normal']
+style.font.name = '宋体'
+style.font.size = Pt(11)
+style.element.rPr.rFonts.set(qn('w:eastAsia'), '宋体')
+
+title = doc.add_heading('学生成绩汇总报告', level=1)
+title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+# 报告说明段落
+doc.add_paragraph()
+doc.add_paragraph('本报告基于《学生信息表》自动生成，对每位学生的各科成绩进行汇总，计算总分。').paragraph_format.first_line_indent = Inches(0.3)
+
+# 基本统计信息
+avg_total = df['总分'].mean()
+max_total = df['总分'].max()
+min_total = df['总分'].min()
+top_student = df.loc[df['总分'].idxmax(), '姓名']
+
+p = doc.add_paragraph()
+p.add_run('学生人数：').bold = True
+p.add_run(f'{len(df)} 人    ')
+p.add_run('平均总分：').bold = True
+p.add_run(f'{avg_total:.2f}    ')
+p.add_run('最高总分：').bold = True
+p.add_run(f'{max_total}（{top_student}）    ')
+p.add_run('最低总分：').bold = True
+p.add_run(f'{min_total}')
+
+# 插入表格
+doc.add_paragraph()
+doc.add_paragraph('详细成绩如下：').paragraph_format.first_line_indent = Inches(0.3)
+
+table = doc.add_table(rows=df.shape[0] + 1, cols=df.shape[1])
+table.style = 'Table Grid'
+
+# 表头
+for col_idx, col_name in enumerate(df.columns):
+    cell = table.cell(0, col_idx)
+    cell.text = col_name
+    for paragraph in cell.paragraphs:
+        paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for run in paragraph.runs:
+            run.font.bold = True
+            run.font.size = Pt(11)
+
+# 表体
+for row_idx, (_, row_data) in enumerate(df.iterrows(), start=1):
+    for col_idx, value in enumerate(row_data):
+        cell = table.cell(row_idx, col_idx)
+        cell.text = str(value)
+        for paragraph in cell.paragraphs:
+            paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            for run in paragraph.runs:
+                run.font.size = Pt(10)
+                # 总分列在 Word 中也加粗红色
+                if df.columns[col_idx] == '总分':
+                    run.font.bold = True
+                    run.font.color.rgb = RGBColor(0xC0, 0x00, 0x00)
+
+doc.add_paragraph()
+doc.add_paragraph('——报告结束——').alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+doc.save(WORD_OUTPUT)
+print(f'Word 报告已生成：{WORD_OUTPUT}')
+print('Excel 与 Word 联动处理完毕。')
