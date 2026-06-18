@@ -7,6 +7,7 @@ from .docx_converter import DocxConverter
 from .excel_converter import ExcelConverter
 from .pdf_converter import PdfConverter
 from .txt_converter import TxtConverter
+from .url_converter import UrlConverter
 
 
 ALL_CONVERTERS: list[type[BaseConverter]] = [
@@ -14,6 +15,7 @@ ALL_CONVERTERS: list[type[BaseConverter]] = [
     PdfConverter,
     TxtConverter,
     ExcelConverter,
+    UrlConverter,
 ]
 
 
@@ -44,3 +46,16 @@ def convert_file(file_path: str | Path, output_dir: str | Path | None = None) ->
 
 def supported_extensions() -> list[str]:
     return sorted(set(EXTENSION_MAP.keys()))
+
+
+def convert_url(url: str, output_dir: str | Path | None = None, filename: str | None = None) -> str:
+    """
+    将网页链接转换为 Markdown 文件。
+    
+    :param url: 目标网页 URL
+    :param output_dir: 输出目录，默认当前工作目录
+    :param filename: 输出文件名（不含 .md 后缀），默认从 URL 自动生成
+    :return: 生成的 .md 文件的绝对路径
+    """
+    converter = UrlConverter()
+    return converter.convert_url(url, output_dir, filename)
