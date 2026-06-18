@@ -1,0 +1,16 @@
+{
+  "ai": {
+    "base_url": "https://apinexus.net/v1",
+    "api_key": "sk-sDEibUaljCazUh6O0wMUMoWEZobkH7cHl5qKmkc6Ai3fPkr5",
+    "model": "gpt-5.4-mini",
+    "temperature": 0.7
+  },
+  "output": {
+    "output_dir": "C:\\Users\\zch\\Documents\\trae_projects\\wodejishiqi\\doc_converter_app\\core\\output",
+    "save_to_same_dir": false
+  },
+  "ui": {
+    "theme": "green-light",
+    "last_tab": 1
+  }
+}
