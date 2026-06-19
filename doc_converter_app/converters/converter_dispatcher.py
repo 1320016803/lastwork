@@ -5,7 +5,9 @@ from pathlib import Path
 from .converter_base import BaseConverter
 from .docx_converter import DocxConverter
 from .excel_converter import ExcelConverter
+from .html_converter import HtmlConverter
 from .pdf_converter import PdfConverter
+from .ppt_converter import PptConverter
 from .txt_converter import TxtConverter
 
 
@@ -14,6 +16,8 @@ ALL_CONVERTERS: list[type[BaseConverter]] = [
     PdfConverter,
     TxtConverter,
     ExcelConverter,
+    PptConverter,
+    HtmlConverter,
 ]
 
 
