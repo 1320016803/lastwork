@@ -59,13 +59,19 @@ class PptConverter(BaseConverter):
             text = run.text
             if not text:
                 continue
-            if run.bold and run.italic:
+            # python-pptx 的粗体/斜体/下划线都放在 run.font 下
+            font = run.font
+            is_bold = getattr(font, "bold", None) is True
+            is_italic = getattr(font, "italic", None) is True
+            is_underline = getattr(font, "underline", None) not in (None, False, 0)
+
+            if is_bold and is_italic:
                 text = f"***{text}***"
-            elif run.bold:
+            elif is_bold:
                 text = f"**{text}**"
-            elif run.italic:
+            elif is_italic:
                 text = f"*{text}*"
-            if run.underline:
+            if is_underline:
                 text = f"<u>{text}</u>"
             parts.append(text)
         return "".join(parts).strip()

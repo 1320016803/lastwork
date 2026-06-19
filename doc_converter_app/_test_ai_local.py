@@ -1,9 +1,14 @@
 """不依赖网络的 AI 客户端测试：使用本地 http.server 模拟 API 响应。"""
+import io
 import json
 import sys
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
+
+# Windows cmd 下强制用 UTF-8 输出，避免 emoji 等字符引发 UnicodeEncodeError
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 APP_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(APP_DIR))

@@ -18,56 +18,52 @@ class PdfConverter(BaseConverter):
             page = doc[page_num]
             blocks.append(f"## 第 {page_num + 1} 页\n")
 
-            # 先用简单的纯文本提取，按行拼接，保留原排版
             text = page.get_text("text") or ""
             lines = [ln.rstrip() for ln in text.splitlines()]
 
-            # 如果某一行字号明显大于其他行，当作小标题
-            # 这里采用简单策略：短行（<60 字符）后紧跟空行的当作 Markdown 标题
-            page_lines: list[str] = []
+            # 先按空行切成「段落」
+            paragraphs: list[list[str]] = []
+            current: list[str] = []
             for ln in lines:
-                stripped = ln.strip()
-                if not stripped:
-                    page_lines.append("")
-                    continue
-                is_short_title = (
-                    len(stripped) < 40
-                    and not stripped.endswith((".", "。", "，", ",", "；", ";", "！", "!", "？", "?"))
-                )
-                if is_short_title:
-                    page_lines.append(f"### {stripped}")
+                if ln.strip() == "":
+                    if current:
+                        paragraphs.append(current)
+                        current = []
+                else:
+                    current.append(ln)
+            if current:
+                paragraphs.append(current)
+
+            page_lines: list[str] = []
+            for para in paragraphs:
+                stripped = " ".join(ln.strip() for ln in para)
+                # 单行（< 40 字符且不以标点结尾）视作标题；其余视作正文并合并断行
+                if len(para) == 1 and len(para[0].strip()) < 40 and not para[0].rstrip().endswith(
+                    (".", "。", "，", ",", "；", ";", "！", "!", "？", "?", ":", "：")
+                ):
+                    page_lines.append(f"### {para[0].strip()}")
                 else:
                     page_lines.append(stripped)
+                page_lines.append("")
 
-            blocks.append("\n".join(self._merge_text_lines(page_lines)))
+            blocks.append("\n".join(self._cleanup_lines(page_lines)))
 
         doc.close()
 
         md = "\n\n".join(blocks).strip() + "\n"
         return md
 
-    def _merge_text_lines(self, lines: list[str]) -> list[str]:
-        """把被换行断开的句子合起来（PDF 经常每行自动换行）。
-        策略：非空、非标题行与下一行合并，直到遇到空行或以中文句号/英文句号结束。"""
+    def _cleanup_lines(self, lines: list[str]) -> list[str]:
+        """去除连续空行，保持段落间只有一个空行"""
         result: list[str] = []
-        buffer: list[str] = []
+        prev_blank = False
         for ln in lines:
-            if ln.strip() == "":
-                if buffer:
-                    result.append(" ".join(b.strip() for b in buffer))
-                    buffer = []
-                result.append("")
-                continue
-            if ln.startswith("#"):
-                if buffer:
-                    result.append(" ".join(b.strip() for b in buffer))
-                    buffer = []
+            is_blank = ln.strip() == ""
+            if is_blank:
+                if not prev_blank:
+                    result.append("")
+                prev_blank = True
+            else:
                 result.append(ln)
-                continue
-            buffer.append(ln)
-            if ln.rstrip().endswith((".", "。", "？", "?", "！", "!", "；", ";", ":")):
-                result.append(" ".join(b.strip() for b in buffer))
-                buffer = []
-        if buffer:
-            result.append(" ".join(b.strip() for b in buffer))
+                prev_blank = False
         return result

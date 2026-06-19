@@ -1,0 +1,23 @@
+{
+  "supported_extensions": [
+    ".docx",
+    ".htm",
+    ".html",
+    ".md",
+    ".pdf",
+    ".ppt",
+    ".pptx",
+    ".txt",
+    ".xls",
+    ".xlsx"
+  ],
+  "success": [
+    "TXT",
+    "DOCX",
+    "XLSX",
+    "PDF",
+    "HTML",
+    "PPTX"
+  ],
+  "errors": []
+}
